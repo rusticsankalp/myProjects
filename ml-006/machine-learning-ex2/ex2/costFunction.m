@@ -20,11 +20,16 @@ grad = zeros(size(theta));
 % Note: grad should have the same dimensions as theta
 %
 
+htheta = sigmoid(X * theta);
+j1 = -y.*log(htheta);
+j2 = -(1-y).*log(1-htheta);
+jall = j1 + j2;
+J = sum (jall)/m;
 
-
-
-
-
+resdiff =  (htheta - y );
+resdiff2 = resdiff.*X;
+ressum = sum(resdiff2) /m ;
+grad = ressum';
 
 
 % =============================================================
