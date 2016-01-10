@@ -105,7 +105,12 @@ fprintf('\n');
 % Recall that the first column of X is all-ones. Thus, it does
 % not need to be normalized.
 
-price = ((theta' * (([1; 1650; 3] - mu)./sigma))+mu).*sigma;
+%price = ((theta' * (([1; 1650; 3] - mu)./sigma))+mu).*sigma;
+px = [1650 ; 3];
+pfn = (px - mu')./sigma';
+pfn1 = [1;pfn];
+
+price =  theta' * pfn1;
 
 
 % ============================================================
