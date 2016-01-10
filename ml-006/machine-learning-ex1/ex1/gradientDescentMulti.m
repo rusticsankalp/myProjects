@@ -20,9 +20,11 @@ for iter = 1:num_iters
 
 m = length(y); % number of training examples
 
-h= theta' * X;
+h=  X * theta;
 
 diff = h-y;
+
+%%:Todo change to vectorized or add a loop
 th0 = theta(1,1)- alpha *(sum (diff)/m);
 th1 = theta (2,1) - alpha * (sum ( diff .* X(:,2))/m);
 th2 = theta (3,1) - alpha * (sum ( diff .* X(:,3))/m);
