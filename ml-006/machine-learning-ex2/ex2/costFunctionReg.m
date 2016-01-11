@@ -24,6 +24,7 @@ j2 = -(1-y).*log(1-htheta);
 jall = j1 + j2;
 
 thetasq = (theta.*theta);
+%% did not regulaize theta0 ,the constant term. In this case it is theta1.
 regsum  = sum(thetasq) - thetasq(1);
 regcost = lambda*regsum/(2 * m);
 
@@ -31,8 +32,16 @@ J = sum (jall)/m+regcost;
 
 resdiff =  (htheta - y );
 resdiff2 = resdiff.*X;
-ressum = sum(resdiff2) /m ;
-grad = ressum';
+ressum = (sum(resdiff2) /m) + theta.*(lambda/m);
+
+
+%thetareg = zeros(length(ressum),1);
+%theta1 = theta(1);
+%thetareg = lambda*theta/m;
+%thetareg(1) = theta1;
+
+
+grad = (ressum)';
 
 
 

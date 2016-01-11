@@ -1,0 +1,20 @@
+data = load('ex2data2.txt');
+X = data(:, [1, 2]); y = data(:, 3);
+X = mapFeature(X(:,1), X(:,2));
+theta = zeros(size(X, 2), 1);
+
+lambda = 1;
+%%%%%%%%%%%
+m = length(y); % number of training examples
+htheta = sigmoid(X * theta);
+j1 = -y.*log(htheta);
+j2 = -(1-y).*log(1-htheta);
+jall = j1 + j2;
+thetasq = (theta.*theta);
+regsum  = sum(thetasq) - thetasq(1);
+regcost = lambda*regsum/(2 * m);
+J = sum (jall)/m+regcost;
+%%%%%%%%%%%
+resdiff =  (htheta - y );
+resdiff2 = resdiff.*X;
+ressum = (sum(resdiff2) /m) + theta.*(lambda/m);
