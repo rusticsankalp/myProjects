@@ -32,16 +32,19 @@ J = sum (jall)/m+regcost;
 
 resdiff =  (htheta - y );
 resdiff2 = resdiff.*X;
-ressum = (sum(resdiff2) /m) + theta.*(lambda/m);
+%ressum = (sum(resdiff2) /m) + theta.*(lambda/m);
 
+%theta1 = theta(1);
+thetareg = theta.*(lambda/m);
+%% do not regularize first theta , this means do not use in calculation
+thetareg(1) = 0;
+
+% sum(X,1) does a sum across the rows. sum(X,2) does sum across the columns.
+ressum = (sum(resdiff2,1) /m)' + thetareg;
 
 %thetareg = zeros(length(ressum),1);
-%theta1 = theta(1);
-%thetareg = lambda*theta/m;
-%thetareg(1) = theta1;
 
-
-grad = (ressum)';
+grad = ressum;
 
 
 
