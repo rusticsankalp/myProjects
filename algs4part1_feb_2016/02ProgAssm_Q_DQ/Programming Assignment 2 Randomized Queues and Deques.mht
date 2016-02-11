@@ -1,0 +1,244 @@
+From: "Saved by Internet Explorer 11"
+Subject: Programming Assignment 2: Randomized Queues and Deques
+Date: Thu, 11 Feb 2016 14:54:15 -0800
+MIME-Version: 1.0
+Content-Type: text/html;
+	charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://coursera.cs.princeton.edu/algs4/assignments/queues.html
+X-MimeOLE: Produced By Microsoft MimeOLE V10.0.10011.16384
+
+=EF=BB=BF<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN" =
+""><HTML><HEAD><META=20
+content=3D"IE=3D5.0000" http-equiv=3D"X-UA-Compatible">
+ <TITLE>Programming Assignment 2: Randomized Queues and Deques </TITLE>
+<META http-equiv=3D"Content-Type" content=3D"text/html; =
+charset=3Dutf-8">
+<META name=3D"GENERATOR" content=3D"MSHTML 11.00.10586.71"></HEAD>=20
+<BODY>
+<H2>Programming Assignment 2: Randomized Queues and Deques</H2>
+<P>Write a generic data type for a deque and a randomized queue. The =
+goal of=20
+this assignment is to implement elementary data structures using arrays =
+and=20
+linked lists, and to introduce you to generics and iterators.=20
+<P><B>Dequeue.</B> A <EM>double-ended queue</EM> or <EM>deque</EM> =
+(pronounced=20
+"deck") is a generalization of a  stack and a queue that supports adding =
+and=20
+removing items  from either the front or the back of the data structure. =
+Create=20
+a generic data type <TT>Deque</TT> that implements the following API:=20
+<BLOCKQUOTE>
+<PRE><B>public class Deque&lt;Item&gt; implements Iterable&lt;Item&gt; =
+{</B>=0A=
+<B>   public Deque()                           </B><FONT =
+color=3D"gray">// construct an empty deque</FONT>=0A=
+<B>   public boolean isEmpty()                 </B><FONT =
+color=3D"gray">// is the deque empty?</FONT>=0A=
+<B>   public int size()                        </B><FONT =
+color=3D"gray">// return the number of items on the deque</FONT>=0A=
+<B>   public void addFirst(Item item)          </B><FONT =
+color=3D"gray">// add the item to the front</FONT>=0A=
+<B>   public void addLast(Item item)           </B><FONT =
+color=3D"gray">// add the item to the end</FONT>=0A=
+<B>   public Item removeFirst()                </B><FONT =
+color=3D"gray">// remove and return the item from the front</FONT>=0A=
+<B>   public Item removeLast()                 </B><FONT =
+color=3D"gray">// remove and return the item from the end</FONT>=0A=
+<B>   public Iterator&lt;Item&gt; iterator()         </B><FONT =
+color=3D"gray">// return an iterator over items in order from front to =
+end</FONT>=0A=
+<B>   public static void main(String[] args)   </B><FONT =
+color=3D"gray">// unit testing</FONT>=0A=
+<B>}</B>=0A=
+</PRE></BLOCKQUOTE>
+<P><EM>Corner cases.</EM> Throw a =
+<TT>java.lang.NullPointerException</TT> if the=20
+client attempts to add a null item; throw a=20
+<TT>java.util.NoSuchElementException</TT> if the client attempts to =
+remove an=20
+item from an empty deque; throw a=20
+<TT>java.lang.UnsupportedOperationException</TT> if the client calls the =
+
+<TT>remove()</TT> method in the iterator; throw a=20
+<TT>java.util.NoSuchElementException</TT> if the client calls the=20
+<TT>next()</TT> method in the iterator and there are no more items to =
+return.=20
+<P><EM>Performance requirements.</EM> &nbsp;Your deque implementation =
+must=20
+support each deque operation in <EM>constant worst-case time</EM>. A =
+deque=20
+containing <EM>N</EM> items must use at most 48<EM>N</EM> + 192 bytes of =
+memory.
+ and use space proportional to the number of items <EM>currently</EM> in =
+the=20
+deque. Additionally, your iterator implementation must support each =
+operation=20
+(including construction) in <EM>constant worst-case time</EM>.=20
+<P><B>Randomized queue.</B> A <EM>randomized queue</EM> is similar to a =
+stack or=20
+queue, except that the item removed is chosen uniformly at random from =
+items in
+ the data structure. Create a generic data type <TT>RandomizedQueue</TT> =
+that=20
+implements the following API:=20
+<BLOCKQUOTE>
+<PRE><B>public class RandomizedQueue&lt;Item&gt; implements =
+Iterable&lt;Item&gt; {</B>=0A=
+<B>   public RandomizedQueue()                 </B><FONT =
+color=3D"gray">// construct an empty randomized queue</FONT>=0A=
+<B>   public boolean isEmpty()                 </B><FONT =
+color=3D"gray">// is the queue empty?</FONT>=0A=
+<B>   public int size()                        </B><FONT =
+color=3D"gray">// return the number of items on the queue</FONT>=0A=
+<B>   public void enqueue(Item item)           </B><FONT =
+color=3D"gray">// add the item</FONT>=0A=
+<B>   public Item dequeue()                    </B><FONT =
+color=3D"gray">// remove and return a random item</FONT>=0A=
+<B>   public Item sample()                     </B><FONT =
+color=3D"gray">// return (but do not remove) a random item</FONT>=0A=
+<B>   public Iterator&lt;Item&gt; iterator()         </B><FONT =
+color=3D"gray">// return an independent iterator over items in random =
+order</FONT>=0A=
+<B>   public static void main(String[] args)   </B><FONT =
+color=3D"gray">// unit testing</FONT>=0A=
+<B>}</B>=0A=
+</PRE></BLOCKQUOTE>
+<P><EM>Corner cases.</EM> The order of two or more iterators to the same =
+
+randomized queue must be <EM>mutually independent</EM>; each iterator =
+must=20
+maintain its own random order. Throw a =
+<TT>java.lang.NullPointerException</TT>
+ if the client attempts to add a null item; throw a=20
+<TT>java.util.NoSuchElementException</TT> if the client attempts to =
+sample or=20
+dequeue an item from an empty randomized queue; throw a=20
+<TT>java.lang.UnsupportedOperationException</TT> if the client calls the =
+
+<TT>remove()</TT> method in the iterator; throw a=20
+<TT>java.util.NoSuchElementException</TT> if the client calls the=20
+<TT>next()</TT> method in the iterator and there are no more items to =
+return.=20
+<P><EM>Performance requirements.</EM> Your randomized queue =
+implementation must=20
+support each randomized queue operation (besides creating an iterator) =
+in=20
+<EM>constant amortized time</EM>. That is, any sequence of <EM>M</EM> =
+randomized=20
+queue operations (starting from an empty queue) should take at most =
+<EM>cM</EM>=20
+steps in the worst case, for some constant <EM>c</EM>. A randomized =
+queue=20
+containing <EM>N</EM> items must use at most 48<EM>N</EM> + 192 bytes of =
+memory.
+ Additionally, your iterator implementation must support  operations=20
+<TT>next()</TT> and <TT>hasNext()</TT> in <EM>constant worst-case =
+time</EM>; and=20
+construction in <EM>linear time</EM>; you may (and will need to) use a =
+linear=20
+amount of extra memory per iterator.=20
+<P><B>Subset client.</B> Write a client program <TT>Subset.java</TT> =
+that takes=20
+a command-line integer <EM>k</EM>; reads in a sequence of <EM>N</EM> =
+strings=20
+from standard input using <TT>StdIn.readString()</TT>; and prints out =
+exactly=20
+<EM>k</EM> of them, uniformly at random. Each item from the sequence can =
+be=20
+printed out at most once. You may assume that 0 =E2=89=A4 <EM>k</EM> =
+=E2=89=A4 <EM>N</EM>, where=20
+<EM>N</EM> is  the number of string on standard input.=20
+<BLOCKQUOTE>
+<PRE>% <B>echo A B C D E F G H I | java Subset 3</B>       % <B>echo AA =
+BB BB BB BB BB CC CC | java Subset 8</B>=0A=
+C                                              BB=0A=
+G                                              AA=0A=
+A                                              BB=0A=
+                                               CC=0A=
+% <B>echo A B C D E F G H I | java Subset 3</B>       BB=0A=
+E                                              BB=0A=
+F                                              CC=0A=
+G                                              BB=0A=
+</PRE></BLOCKQUOTE>
+The running time of <TT>Subset</TT> must be linear in the size of the =
+input. You=20
+may use only a constant amount of memory plus either one <TT>Deque</TT> =
+or=20
+<TT>RandomizedQueue</TT> object of maximum size at most <EM>N</EM>, =
+where=20
+<EM>N</EM> is the number of strings on standard input. (For an extra =
+challenge,=20
+use only one <TT>Deque</TT> or <TT>RandomizedQueue</TT> object of =
+maximum size=20
+at most <EM>k</EM>.) It should have the following API.=20
+<BLOCKQUOTE>
+<PRE><B>public class Subset {</B>=0A=
+<B>   public static void main(String[] args)</B>=0A=
+<B>}</B>=0A=
+</PRE></BLOCKQUOTE><!--=0A=
+=0A=
+<p><li>=0A=
+Write a program <tt>Palindrome.java</tt> that=0A=
+reads in a sequence of characters from standard input,=0A=
+using <tt>StdIn.readChar()</tt>, and determines =0A=
+whether that sequence represents a <em>Watson-Crick=0A=
+complemented palindrome</em>: the {A, C, T, G}-sequence=0A=
+equals its reverse=0A=
+when you replace each base with its complement: A-T, C-G).=0A=
+Watson-Crick palindromes have many important biological roles.=0A=
+For example, tumor cells frequently amplify their genes by=0A=
+forming Watson-Crick palindromes.=0A=
+=0A=
+<blockquote>=0A=
+<pre>=0A=
+% <b>echo AAAACGTTTT | java Palindrome</b>            % <b>echo =
+AAAACTTTT | java Palindrome</b>=0A=
+true                                           false=0A=
+=0A=
+% <b>echo AGCTAGCT | java Palindrome</b>              % <b>echo agctagct =
+| java Palindrome</b>=0A=
+true                                           false=0A=
+=0A=
+% <b>echo GC | java Palindrome</b>                    % <b>echo AGCTTCGA =
+| java Palindrome</b>=0A=
+true                                           false=0A=
+=0A=
+% <b>echo | java Palindrome</b>                       % <b>echo A | java =
+Palindrome</b>=0A=
+true                                           false=0A=
+</pre>=0A=
+</blockquote>=0A=
+=0A=
+=0A=
+</ul>=0A=
+-->=20
+<P><B>Deliverables.</B> Submit only <TT>Deque.java</TT>,=20
+<TT>RandomizedQueue.java</TT>, and <TT>Subset.java</TT>. We will supply=20
+<TT>algs4.jar</TT>. Your submission not call library functions except =
+those in=20
+<A =
+href=3D"http://algs4.cs.princeton.edu/code/javadoc/edu/princeton/cs/algs4=
+/StdIn.html"><TT>StdIn</TT></A>,=20
+<A =
+href=3D"http://algs4.cs.princeton.edu/code/javadoc/edu/princeton/cs/algs4=
+/StdOut.html"><TT>StdOut</TT></A>,=20
+<A =
+href=3D"http://algs4.cs.princeton.edu/code/javadoc/edu/princeton/cs/algs4=
+/StdRandom.html"><TT>StdRandom</TT></A>,=20
+<TT>java.lang</TT>, <TT>java.util.Iterator</TT>, and=20
+<TT>java.util.NoSuchElementException</TT>. In particular, you may not =
+use either=20
+<TT>java.util.LinkedList</TT> or <TT>java.util.ArrayList</TT>. =
+</P></BODY><!--=0A=
+<p><br><Br>=0A=
+=0A=
+<ADDRESS><SMALL>=0A=
+This assignment was developed by Kevin Wayne.=0A=
+<br>Copyright &copy; 2005.=0A=
+</SMALL>=0A=
+</ADDRESS>=0A=
+</BODY></HTML>=0A=
+--></HTML>

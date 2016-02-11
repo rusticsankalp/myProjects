@@ -1,0 +1,266 @@
+From: "Saved by Internet Explorer 11"
+Subject: Programming Assignment 3 Checklist: Pattern Recognition
+Date: Thu, 11 Feb 2016 14:55:17 -0800
+MIME-Version: 1.0
+Content-Type: text/html;
+	charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://coursera.cs.princeton.edu/algs4/checklists/collinear.html
+X-MimeOLE: Produced By Microsoft MimeOLE V10.0.10011.16384
+
+=EF=BB=BF<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><META content=3D"IE=3D5.0000" =
+http-equiv=3D"X-UA-Compatible">
+<TITLE>Programming Assignment 3 Checklist: Pattern Recognition </TITLE>=20
+<META http-equiv=3D"Content-Type" content=3D"text/html; =
+charset=3Dutf-8">
+<META name=3D"GENERATOR" content=3D"MSHTML 11.00.10586.71"></HEAD>=20
+<BODY>
+<H3>Programming Assignment 3 Checklist: Pattern Recognition </H3>
+<P><BR>
+<TABLE width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"2">
+  <TBODY>
+  <TR align=3D"left">
+    <TD bgcolor=3D"#000000"><FONT color=3D"#ffffff" face=3D"helvetica" =
+size=3D"+0">
+      <CENTER><B>Frequently Asked =
+Questions</B></CENTER></FONT></TR></TBODY></TABLE>
+<P><B>Can the same point appear more than once as input to methods in =
+Point?</B>
+ Yes. For the <TT>slopeTo()</TT> method, this requirement is explicitly =
+stated=20
+in the API; for the comparison methods, this requirement is implicit in =
+the=20
+ contracts for <TT>Comparable</TT> and <TT>Comparator</TT>.=20
+<P><B>The reference solution outputs a line segment in the order=20
+<EM>p</EM>=E2=86=92<EM>q</EM> but my solution outputs it in the reverse =
+order=20
+<EM>q</EM>=E2=86=92<EM>p</EM>. Is that ok?</B> Yes, there are two valid =
+ways to output a=20
+line segment.=20
+<P><B>The reference solution outputs the line segments in a different =
+order than=20
+my solution. Is that OK?</B> Yes, if there are <EM>k</EM> line segments, =
+then=20
+there are <EM>k</EM>! different possible ways to output them.=20
+<P><B>How do I sort a subarray in Java?</B>  <TT>Arrays.sort(a, lo, =
+hi)</TT>=20
+sorts the subarray from <TT>a[lo]</TT> to <TT>a[hi-1]</TT> according to =
+the=20
+natural order of <TT>a[]</TT>. You can use a <TT>Comparator</TT> as the =
+fourth
+ argument to sort according to an alternate order. =20
+<P><B>Where can I see examples of Comparable and Comparator?</B> See the =
+lecture=20
+slides.=20
+<P><B>My program fails only on (some) vertical line segments. What could =
+be=20
+going wrong?</B> Are you dividing by zero? With integers, this produces =
+a=20
+run-time exception. With floating-point numbers, 1.0/0.0 is  positive =
+infinity
+ and -1.0/0.0 is negative infinity. You may also use the constants =20
+<TT>Double.POSITIVE_INFINITY</TT> and <TT>Double.NEGATIVE_INFINITY</TT>. =
+
+<P><B>What does it mean for slopeTo() to return positive zero?</B> Java =
+(and the=20
+IEEE 754 floating-point standard) define two representations of zero: =
+negative=20
+zero and positive zero.=20
+<BLOCKQUOTE>
+<PRE>double a =3D 1.0;=0A=
+double x =3D (a - a) /  a;   // positive zero ( 0.0)=0A=
+double y =3D (a - a) / -a;   // negative zero (-0.0)=0A=
+</PRE></BLOCKQUOTE>
+Note that while <TT>(x =3D=3D y)</TT> is guaranteed to be true, <A =
+href=3D"http://docs.oracle.com/javase/7/docs/api/java/util/Arrays.html#so=
+rt(double[])">Arrays.sort()</A>=20
+treats negative zero as strictly less than positive zero. Thus, to make =
+the=20
+specification precise, we require you to return positive zero for =
+horizontal=20
+line segments. Unless your program casts to the wrapper type =
+<TT>Double</TT>=20
+(either explicitly or via autoboxing), you probably will not notice any=20
+difference in behavior; but, if your program does cast to the wrapper =
+type and=20
+fails only on (some) horizontal line segments, this may be the cause.=20
+<P><B>Is it OK to compare two floating-point numbers a and b for exactly =
+
+equality?</B> In general, it is hazardous to compare a and b for =
+equality if=20
+either is susceptible to floating-point roundoff error. However, in this =
+case,=20
+you are computing b/a, where a and b are integers between -32,767 and =
+32,767. In=20
+Java (and the IEEE 754 floating-point standard), the result of a =
+floating-point=20
+operation (such as division) is the nearest representable value. Thus, =
+for=20
+example, it is guaranteed that <TT>(9.0/7.0 =3D=3D 45.0/35.0)</TT>. In =
+other words,=20
+it's sometimes OK to compare floating-point numbers for exact equality =
+(but only=20
+when you know exactly what you are doing!)=20
+<P>Note also that it is possible to implement <TT>compare()</TT> and=20
+<TT>FastCollinearPoints</TT> using only integer arithmetic (but you are =
+not=20
+required to do so).=20
+<P><B>I'm having trouble avoiding subsegments  Fast.java when there are =
+5 or=20
+more points on a line segment. Any advice?</B> Not handling the =
+5-or-more case=20
+is a bit tricky, so don't kill yourself over it.=20
+<P><B>I created a nested Comparator class within Point. Within the =
+nested=20
+Comparator class, the keyword <TT>this</TT> refers to the Comparator =
+object. How=20
+do I refer to the Point instance of the outer class?</B> Use =
+<TT>Point.this</TT>=20
+instead of <TT>this</TT>. Note that you can refer directly to instance =
+methods=20
+of the outer class (such as <TT>slopeTo()</TT>); with proper design, you =
+
+shouldn't need this awkward notation. <!--=0A=
+<p><b>Why aren't I allowed to change the pen color or pen radius?</b>=0A=
+It will mess with our grading script.=0A=
+-->=20
+<P><BR>
+<TABLE width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"2">
+  <TBODY>
+  <TR align=3D"left">
+    <TD bgcolor=3D"#000000"><FONT color=3D"#ffffff" face=3D"helvetica" =
+size=3D"+0">
+      <CENTER><B>Testing</B></CENTER></FONT></TR></TBODY></TABLE>
+<P><B>Sample data files.</B> The directory <A =
+href=3D"http://coursera.cs.princeton.edu/algs4/testing/collinear">colline=
+ar</A>
+ contains some sample input files in the specified format. Associated =
+with some=20
+of the input .txt files are output .png files that contains the desired=20
+graphical output. For convenience, <A =
+href=3D"http://coursera.cs.princeton.edu/algs4/testing/collinear-testing.=
+zip">collinear-testing.zip</A>
+ contains all of these files bundled together. Thanks to Jesse Levinson =
+'05 for=20
+the remarkable input file <TT>rs1423.txt</TT>; feel free to create your =
+own and=20
+share with us in the Discussion Forums.=20
+<P><BR>
+<TABLE width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"2">
+  <TBODY>
+  <TR align=3D"left">
+    <TD bgcolor=3D"#000000"><FONT color=3D"#ffffff" face=3D"helvetica" =
+size=3D"+0">
+      <CENTER><B>Possible Progress =
+Steps</B></CENTER></FONT></TR></TBODY></TABLE>
+<P>These are purely suggestions for how you might make progress.  You do =
+not=20
+have to follow these steps.=20
+<OL>
+  <P>
+  <LI><B>Getting started.</B> Download  <A =
+href=3D"http://coursera.cs.princeton.edu/algs4/testing/collinear/Point.ja=
+va">Point.java</A>.=20
+  <P></P>
+  <LI><B>Slope.</B> To begin, implement the <TT>slopeTo()</TT> method. =
+Be sure=20
+  to consider a variety of corner cases, including horizontal, vertical, =
+and=20
+  degenerate line segments.=20
+  <P></P>
+  <LI><B>Brute force algorithm.</B> Write code to iterate through all =
+4-tuples=20
+  and check if the 4 points are collinear. To form a line segment, you =
+need to=20
+  know its endpoints. One approach is to form a line segment only if the =
+4=20
+  points are in ascending order (say, relative to the natural order), in =
+which=20
+  case, the endpoints are the first and last points.=20
+  <P><EM>Hint</EM>: don't waste time micro-optimizing the brute-force =
+solution.=20
+  Though, there are two easy opportunities. First, you can iterate =
+through all=20
+  combinations of 4 points (N choose 4) instead of all 4 tuples (N^4), =
+saving a=20
+  factor of 4! =3D 24. Second, you don't need to consider whether 4 =
+points are=20
+  collinear if you already know that the first 3 are not collinear; this =
+can=20
+  save you a factor of N on typical inputs.=20
+  <P></P>
+  <LI><B>Fast algorithm.</B>=20
+  <UL>
+    <P>
+    <LI>Implement the <TT>slopeOrder()</TT> method in <TT>Point</TT>. =
+The=20
+    complicating issue is that the comparator needed to compare the =
+slopes that=20
+    two points <TT>q</TT> and <TT>r</TT> make with a third point =
+<TT>p</TT>,=20
+    which changes from sort to sort. To do this, create a private nested =
+
+    (non-static) class <TT>SlopeOrder</TT> that implements the=20
+    <TT>Comparator&lt;Point&gt;</TT> interface. This class has a single =
+method=20
+    <TT>compare(q1, q2)</TT> that compares the slopes that <TT>q1</TT> =
+and=20
+    <TT>q2</TT> make with the invoking object <TT>p</TT>. the=20
+    <TT>slopeOrder()</TT> method should create an instance of this =
+nested class=20
+    and return it.=20
+    <P></P>
+    <LI>Implement the sorting solution. Watch out for corner cases. =
+Don't worry=20
+    about 5 or more points on a line segment yet. </LI></UL></LI></OL>
+<P><BR>
+<TABLE width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"2">
+  <TBODY>
+  <TR align=3D"left">
+    <TD bgcolor=3D"#000000"><FONT color=3D"#ffffff" face=3D"helvetica" =
+size=3D"+0">
+      <CENTER><B>Enrichment</B></CENTER></FONT></TR></TBODY></TABLE>
+<P>
+<P><B>Can the problem be solved in quadratic time and linear space?</B> =
+Yes, but=20
+the only compare-based algorithm I know of that guarantees quadratic =
+time in the
+ worst case is quite sophisticated. It involves converting the points to =
+their=20
+dual line segments and <A =
+href=3D"http://www.hpl.hp.com/techreports/Compaq-DEC/SRC-RR-9.pdf">topolo=
+gically=20
+sweeping the arrangement of lines</A> by Edelsbrunner and Guibas.=20
+<P><B>Can the decision version of the problem be solved in subquadratic=20
+time?</B> The original version of the problem cannot be solved in =
+subquadratic=20
+time because there might be a quadratic number of line segments to =
+output. (See
+ next question.) The decision version asks whether there exists a set of =
+4=20
+collinear points. This version of the problem belongs to a group of =
+problems=20
+that are known as <A =
+href=3D"http://cs.smith.edu/~orourke/TOPP/P11.html#Problem.11">3SUM-hard<=
+/A>.
+ A famous unresolved conjecture is that such problems have no =
+subquadratic=20
+algorithms. Thus, the sorting algorithm presented above is about the =
+best we can=20
+hope for (unless the conjecture is wrong). Under a <A =
+href=3D"http://cjtcs.cs.uchicago.edu/articles/1999/8/contents.html">
+restricted decision tree</A> model of computation, Erickson proved that =
+the=20
+conjecture is true.=20
+<P><B>What's the maximum number of (maximal) collinear sets of points in =
+a set=20
+of N points in the plane?</B> It can grow quadratically as a function of =
+
+<EM>N</EM>. Consider the <EM>N</EM> points of the form: (<EM>x</EM>, =
+<EM>y</EM>)=20
+for <EM>x</EM> =3D 0, 1, 2, and 3 and <EM>y</EM> =3D 0, 1, 2, ..., =
+<EM>N</EM> / 4.
+ This means that if you store all of the (maximal) collinear sets of =
+points, you=20
+will need quadratic space in the worst case. </P></BODY></HTML>
