@@ -46,6 +46,7 @@ data/
 *.pidb
 *.log
 *.scc
+*.class
 
 # Visual C++ cache files
 ipch/
