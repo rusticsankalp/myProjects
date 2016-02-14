@@ -2,10 +2,10 @@ import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 public class Percolation {
     
-    int N,nSqr;
-    boolean []sites ;
-    WeightedQuickUnionUF uf;
-    boolean percolated = false;
+   private  int N,nSqr;
+   private  boolean []sites ;
+   private  WeightedQuickUnionUF uf;
+   private  boolean percolated = false;
    public Percolation(int N)               // create N-by-N grid, with all sites blocked
    {
      this.N = N;
@@ -91,7 +91,7 @@ public class Percolation {
        return false;
    }
    
-   public int checkNReturn(int i, int j)
+   private  int checkNReturn(int i, int j)
    {
        if (i <= 0 || i > N) throw new IndexOutOfBoundsException("row index i out of bounds");
        if (j <= 0 || j > N) throw new IndexOutOfBoundsException("row index j out of bounds");
