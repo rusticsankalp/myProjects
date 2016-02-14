@@ -23,46 +23,52 @@ public class Percolation {
    public void open(int i, int j)          // open site (row i, column j) if it is not open already
    {
        int d = checkNReturn(i,j);
-       //int d2;
+       int d2;
        if(sites[d] == false)
        {
            sites[d] = true;
+           
            if(i>1)
            {
-               if(isOpen(i-1,j))
+               d2 = checkNReturn(i-1,j);
+               if(sites[d2] &&!uf.connected(d2,d) )
                {
-                   uf.union(checkNReturn(i-1,j),d);
+                   uf.union(d2,d);
                }
            }
+           
            if(j>1)
-           {
-               if(isOpen(i,j-1))
+           { d2 = checkNReturn(i,j-1);
+               if(sites[d2] &&!uf.connected(d2,d))
                {
-                   uf.union(checkNReturn(i,j-1),d);
+                   uf.union(d2,d);
                }
            }
+           
            if (i<N)
            {
-               if(isOpen(i+1,j))
+               d2 = checkNReturn(i+1,j);
+               if(sites[d2] &&!uf.connected(d2,d))
                {
-                   uf.union(checkNReturn(i+1,j),d);
+                   uf.union(d2,d);
                }
            }
-               
+           
            if(j<N)
            {
-               if(isOpen(i,j+1))
+               d2 = checkNReturn(i,j+1);
+               if(sites[d2] &&!uf.connected(d2,d))
                {
-                   uf.union(checkNReturn(i,j+1),d);
+                   uf.union(d2,d);
                }
            }
            
-           if(i==1)
+           if(i==1 &&!uf.connected(0,d))
                uf.union(0,d);
            
-           if(i==N)
+           if(i==N && !uf.connected(d,nSqr+1))
            {
-               //uf.union(d,nSqr+1);
+               uf.union(d,nSqr+1);
                /*
                if(isFull(i,j))
                       percolated = true;
@@ -83,14 +89,16 @@ public class Percolation {
    }
    public boolean percolates()             // does the system percolate?
    {
-     //return (uf.connected(0,nSqr+1));
+     return (uf.connected(0,nSqr+1));
       //return percolated;
+       /*
        for(int j =1;j<=N ;j++)
        {
            if(isFull(N,j))
                return true;
        }
        return false;
+       */
    }
    
    private  int checkNReturn(int i, int j)
