@@ -9,6 +9,8 @@ public class PercolationStats {
   private double clo,chi;
    public PercolationStats(int N, int T)     // perform T independent experiments on an N-by-N grid
    {
+       if (N <= 0) throw new   java.lang.IllegalArgumentException("N is too small");
+           if (T <= 0) throw new   java.lang.IllegalArgumentException("T is too small");
        Percolation p;
        int  nSqr = N*N;
        res = new double[T];

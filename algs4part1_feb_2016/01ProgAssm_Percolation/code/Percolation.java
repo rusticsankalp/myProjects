@@ -8,6 +8,8 @@ public class Percolation {
    private  boolean percolated = false;
    public Percolation(int N)               // create N-by-N grid, with all sites blocked
    {
+       
+     if (N <= 0) throw new   java.lang.IllegalArgumentException("N is too small");
      this.N = N;
      nSqr = N*N;
      sites = new boolean[nSqr+2]; //:BugBug Should be +2 instead of +1
