@@ -20,6 +20,15 @@ public class Percolation {
        }
      uf = new WeightedQuickUnionUF(nSqr+2); //:BugBug Should be +2 instead of +1
    }
+   
+   private void checkNUnion(int i2,int j2 , int d)
+   {
+       int d2 = checkNReturn(i2,j2);
+       if(sites[d2] &&!uf.connected(d2,d) )
+          {
+               uf.union(d2,d);
+          }
+   }
    public void open(int i, int j)          // open site (row i, column j) if it is not open already
    {
        int d = checkNReturn(i,j);
@@ -30,39 +39,20 @@ public class Percolation {
            
            if(i>1)
            {
-               d2 = checkNReturn(i-1,j);
-               if(sites[d2] &&!uf.connected(d2,d) )
-               {
-                   uf.union(d2,d);
-               }
-           }
-           
+               checkNUnion(i-1,j,d);
+           }           
            if(j>1)
-           { d2 = checkNReturn(i,j-1);
-               if(sites[d2] &&!uf.connected(d2,d))
-               {
-                   uf.union(d2,d);
-               }
-           }
-           
+           { 
+               checkNUnion(i,j-1,d);
+           }           
            if (i<N)
            {
-               d2 = checkNReturn(i+1,j);
-               if(sites[d2] &&!uf.connected(d2,d))
-               {
-                   uf.union(d2,d);
-               }
-           }
-           
+               checkNUnion(i+1,j,d);
+           }           
            if(j<N)
            {
-               d2 = checkNReturn(i,j+1);
-               if(sites[d2] &&!uf.connected(d2,d))
-               {
-                   uf.union(d2,d);
-               }
-           }
-           
+               checkNUnion(i,j+1,d);
+           }           
            if(i==1 &&!uf.connected(0,d))
                uf.union(0,d);
            
