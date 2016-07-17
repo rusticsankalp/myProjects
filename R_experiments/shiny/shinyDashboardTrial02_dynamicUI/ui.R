@@ -35,10 +35,10 @@ shinyUI(dashboardPage(
       
     ),
     fluidRow(
-      box(width = 12 , plotOutput("plot1", height = 250))
+      box(title = "FailureHashes", background = "maroon", width = 12 , plotOutput("plot1", height = 250))
     ),
     fluidRow(
-      box(width = 12 , dataTableOutput("table1"))
+      box(title = "FailureHashes",width = 12 , dataTableOutput("table1"))
     )
     
   )
